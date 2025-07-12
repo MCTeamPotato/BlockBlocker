@@ -1,0 +1,35 @@
+package me.kall.blockblocker;
+
+import me.kall.blockblocker.common.api.IBlock;
+import me.kall.blockblocker.common.config.Config;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
+
+@Mod(BlockBlocker.MOD_ID)
+public final class BlockBlocker {
+    public static final String MOD_ID = "blockblocker";
+    public static BlockState AIR = null;
+
+    public BlockBlocker(@NotNull FMLJavaModLoadingContext context) {
+        context.registerConfig(ModConfig.Type.COMMON, Config.INSTANCE);
+        context.getModEventBus().addListener((FMLCommonSetupEvent event) -> {
+            initConfig();
+            AIR = Blocks.AIR.defaultBlockState();
+        });
+    }
+
+    private static void initConfig() {
+        Config.BLOCKED_BLOCKS.get().forEach(name -> {
+            Block block = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(name));
+            if (block != null) ((IBlock)block).blockblocker$setBlocked();
+        });
+    }
+}
