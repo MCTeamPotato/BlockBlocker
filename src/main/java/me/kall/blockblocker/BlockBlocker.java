@@ -36,14 +36,20 @@ public final class BlockBlocker {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
-        if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) level.setBlockAndUpdate(pos, AIR);
+        if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) {
+            level.setBlockAndUpdate(pos, AIR);
+            event.setCanceled(true);
+        }
     }
 
     public void onLeftClick(PlayerInteractEvent.LeftClickBlock event) {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
-        if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) level.setBlockAndUpdate(pos, AIR);
+        if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) {
+            level.setBlockAndUpdate(pos, AIR);
+            event.setCanceled(true);
+        }
     }
 
     private static void initConfig() {
