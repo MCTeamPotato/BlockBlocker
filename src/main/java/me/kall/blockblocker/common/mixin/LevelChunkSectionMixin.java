@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 public abstract class LevelChunkSectionMixin {
     @ModifyVariable(method = "setBlockState(IIILnet/minecraft/world/level/block/state/BlockState;Z)Lnet/minecraft/world/level/block/state/BlockState;", at = @At("HEAD"), argsOnly = true)
     private BlockState onSetBlock(BlockState state) {
-        if (((IBlock)state.getBlock()).blockblocker$isBlocked()) state = BlockBlocker.AIR;
+        if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) state = BlockBlocker.AIR;
         return state;
     }
 }
