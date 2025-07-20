@@ -8,15 +8,15 @@ import org.spongepowered.asm.mixin.Unique;
 @Mixin(Block.class)
 public class BlockMixin implements IBlock {
     @Unique
-    private boolean blockblocker$blocked;
+    private boolean blockBlocker$blocked;
 
     @Override
-    public boolean blockblocker$isBlocked() {
-        return this.blockblocker$blocked;
+    public boolean blockBlocker$isBlocked() {
+        return this.blockBlocker$blocked;
     }
 
     @Override
-    public void blockblocker$setBlocked() {
-        this.blockblocker$blocked = true;
+    public void blockBlocker$setBlocked() {
+        this.blockBlocker$blocked = true;
     }
 }
