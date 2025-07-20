@@ -8,6 +8,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -31,14 +33,14 @@ public final class BlockBlocker {
     }
 
     public void onRightClick(PlayerInteractEvent.RightClickBlock event) {
-        Level level = event.getLevel();
+        Level level = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
         if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) level.setBlockAndUpdate(pos, AIR);
     }
 
     public void onLeftClick(PlayerInteractEvent.LeftClickBlock event) {
-        Level level = event.getLevel();
+        Level level = event.getWorld();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
         if (((IBlock)state.getBlock()).blockBlocker$isBlocked()) level.setBlockAndUpdate(pos, AIR);
